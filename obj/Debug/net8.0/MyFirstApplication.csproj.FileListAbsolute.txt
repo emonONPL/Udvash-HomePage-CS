@@ -31,3 +31,4 @@ E:\Visual Studio\MyFirstApplication\MyFirstApplication\obj\Debug\net8.0\refint\M
 E:\Visual Studio\MyFirstApplication\MyFirstApplication\obj\Debug\net8.0\MyFirstApplication.pdb
 E:\Visual Studio\MyFirstApplication\MyFirstApplication\obj\Debug\net8.0\MyFirstApplication.genruntimeconfig.cache
 E:\Visual Studio\MyFirstApplication\MyFirstApplication\obj\Debug\net8.0\ref\MyFirstApplication.dll
+E:\Visual Studio\MyFirstApplication\MyFirstApplication\obj\Debug\net8.0\MyFirstApplication.sourcelink.json
