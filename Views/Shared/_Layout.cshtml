@@ -1,0 +1,89 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - MyFirstApplication</title>
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/MyFirstApplication.styles.css" asp-append-version="true" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" />
+    <link href="~/css/style.css" rel="stylesheet" />
+    <link href="~/css/lg.css" rel="stylesheet" />
+    <link href="~/css/md.css" rel="stylesheet" />
+    <link href="~/css/sm.css" rel="stylesheet" />
+
+</head>
+<body>
+
+    <heade class="sticky-top z-3">
+
+    <nav class="navbar navbar-expand-lg bg-body-white bg-light">
+        <div class="container-lg flex-nowrap">
+            <a class="navbar-brand" href="#">
+                <img src="https://udvash.com/media/Images/UDVASH/Common/Udvash-Logo.png"
+                     alt="Logo" />
+            </a>
+            <div class="d-flex align-items-center">
+                <button type="button" class="btn btn-navbar d-lg-none d-inline">
+                    Join Now
+                </button>
+                <button class="navbar-toggler"
+                        type="button"
+                        data-bs-toggle="collapse"
+                        data-bs-target="#navbarSupportedContent"
+                        aria-controls="navbarSupportedContent"
+                        aria-expanded="false"
+                        aria-label="Toggle navigation">
+                    
+                        <i class="fa-solid fa-bars fa-2x"></i>
+                    <i class="fa-solid fa-xmark fa-2x d-none"></i>
+                </button>
+            </div>
+            <div class="collapse navbar-collapse custom-collapse"
+                 id="navbarSupportedContent">
+                <ul class="navbar-nav ms-auto mb-2 mb-lg-0 align-items-lg-center custom-ul">
+                    <li class="nav-item">
+                        <a class="nav-link fs-5 fw-semibold" aria-current="page" href="#">প্রোগ্রামসমূহ</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link fs-5 fw-semibold" href="#">শাখাসমূহ</a>
+                    </li>
+                    <li>
+                        <hr class="d-lg-none d-block" />
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link d-flex align-items-center gap-2">
+                            <img src="https://udvash.com/media/Images/UDVASH/Common/callusicon.png"
+                                 alt="Call" />
+                            <span class="fs-4 d-lg-none d-block">09666775566</span>
+                        </a>
+                    </li>
+                    <li class="nav-item d-lg-block d-none">
+                        <button type="button" class="btn btn-navbar">Join Now</button>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    </heade>
+
+    <div>
+        <main role="main" >
+            @RenderBody()
+        </main>
+    </div>
+
+    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/js/all.min.js"></script>
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/js/site.js" asp-append-version="true"></script>
+    <script src="~/js/app.js"></script>
+    @await RenderSectionAsync("Scripts", required: false)
+
+
+</body>
+</html>

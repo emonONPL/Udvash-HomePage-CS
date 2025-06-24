@@ -1,0 +1,370 @@
+@import url("https://fonts.googleapis.com/css2?family=Baloo+Da+2:wght@400..800&display=swap");
+
+* {
+  font-family: "Baloo Da 2", sans-serif;
+}
+
+/* ----- Navbar -----  */
+.btn-navbar {
+    font-size: 1.25rem;
+    font-weight: bold;
+    padding: 0.5rem 2.5rem;
+    background: linear-gradient(110deg, #ef512e 0%, #de0655 100%);
+    color: white;
+    border-radius: 1.5rem;
+    margin: 0.5rem;
+    border: none;
+}
+
+.btn-navbar:hover {
+  color: white;
+  background: linear-gradient(110deg, #de0655 0%, #ef512e 100%);
+}
+
+/* ------ Sliders -----  */
+
+#slide1 {
+  background: linear-gradient(to bottom, #8b3d9b, #26022d);
+}
+
+#slide2 {
+  background: linear-gradient(to bottom, #670000, #004d13);
+}
+
+#slide3 {
+  background: linear-gradient(to bottom, #101124, #004e92);
+}
+
+#slide4 {
+  background: linear-gradient(to bottom, #08291c, #007f49);
+}
+
+#slide5 {
+  background: linear-gradient(to bottom, #273271, #5abaa3);
+}
+
+.round-btn {
+  height: 1rem !important;
+  width: 1rem !important;
+  border-radius: 50%;
+  background-color: white;
+  opacity: 100% !important;
+  margin: 0 1rem !important;
+}
+
+.carousel-indicators .active {
+  background-color: #f0532d;
+}
+
+/* ----- Programs Section -----  */
+
+.program-container {
+  background-color: #e1dbff;
+  background-image: url(https://udvash.com/media/Images/UDVASH/Common/courseBefore.png),
+    url(https://udvash.com/media/Images/UDVASH/Common/courseafter.png);
+  background-repeat: no-repeat, no-repeat;
+  background-position: left top, right bottom;
+}
+
+.program-title {
+  font-size: 4rem;
+}
+
+.dropdowns {
+  border: none;
+  border-radius: 2rem;
+  width: 100%;
+  padding: 0.5rem 1rem;
+  font-size: 1.25rem;
+  font-weight: 600;
+}
+
+.program-btn-1 {
+  border: none;
+  border-radius: 1.5rem;
+  padding: 0.5rem 2.5rem;
+  color: white;
+  background: linear-gradient(to right, #0078ff, #840dc9);
+}
+
+.program-btn-1:hover {
+  background: linear-gradient(to left, #0078ff, #840dc9);
+}
+
+.program-btn-2 {
+  border: none;
+  border-radius: 1.5rem;
+  padding: 0.5rem 2.5rem;
+  color: white;
+  background: linear-gradient(to right, #bf00ff, #562270);
+}
+
+.program-btn-2:hover {
+  background: linear-gradient(to left, #bf00ff, #562270);
+}
+
+.program-btn-3 {
+  border: none;
+  border-radius: 1.5rem;
+  padding: 0.5rem 1.5rem;
+  color: white;
+  background: linear-gradient(to right, #38b34a, #043927);
+}
+
+.program-btn-3:hover {
+  background: linear-gradient(to left, #38b34a, #043927);
+}
+
+/* ----- Success Section -----  */
+
+.success-container {
+  background-image: url(https://udvash.com/Themes/NewUdvashUnmeshTheme/img/udvash/successbg.png);
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+.container > h1 {
+  font-size: 4rem;
+}
+
+.carousel-indicator {
+  margin: 0 auto;
+  padding: 1rem;
+  text-align: center;
+  position: relative;
+}
+
+.carousel-indicator > button {
+  height: 1rem !important;
+  width: 1rem !important;
+  border-radius: 50% !important;
+  background-color: #8e9dd8 !important;
+  border: none;
+  opacity: 100% !important;
+  margin: 0 1rem !important;
+}
+
+.carousel-indicator .active {
+  border-radius: 1.5rem !important;
+  background-color: #112780 !important;
+  width: 3rem !important;
+}
+
+.row > .card:nth-child(1) .success-card-title {
+  color: #9b3175;
+}
+.row > .card:nth-child(2) .success-card-title {
+  color: #db4528;
+}
+.row > .card:nth-child(3) .success-card-title {
+  color: #1e9b39;
+}
+.row > .card:nth-child(4) .success-card-title {
+  color: #986206;
+}
+
+/* ----- Testimonial Section -----  */
+
+.testimonial-container {
+  background-image: url(https://udvash.com/Themes/NewUdvashUnmeshTheme/img/udvash/testimonialbg.png);
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  padding-bottom: 3rem;
+}
+
+.testimonial-card {
+  padding: 1.25rem;
+  border-radius: 1.25rem;
+  position: relative;
+  height: 100%;
+  border: 1px solid rgba(0, 0, 0, 0.125);
+}
+
+.testimonial-card h3 {
+  font-size: 1.25rem;
+  font-weight: bold;
+}
+
+.testimonial-card h5 {
+  font-size: 0.75rem;
+  font-weight: bold;
+}
+
+.testimonial-card h2 {
+  font-size: 1.5rem;
+  font-weight: bold;
+}
+
+.card-logo {
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+}
+
+.testimonial-card hr {
+  width: 60%;
+  height: 0.25rem;
+  position: absolute;
+  bottom: -1rem;
+  left: 20%;
+  opacity: 100%;
+}
+
+.row > .col:nth-child(3n + 1) .testimonial-card {
+  background-color: #fefff6;
+  box-shadow: inset 0px 3px 6px #b3c022;
+}
+
+.row > .col:nth-child(3n + 1) .testimonial-card h2 {
+  color: #b3c022;
+}
+
+.row > .col:nth-child(3n + 1) .testimonial-card .card-image {
+  width: 50%;
+  height: auto;
+  border-radius: 50%;
+  border: 0.25rem solid #b3c022;
+  box-shadow: 0px 1px 10px rgba(0, 0, 0, 0.15);
+}
+
+.row > .col:nth-child(3n + 1) .testimonial-card hr {
+  border: 0.25rem solid #b3c022;
+}
+
+.row > .col:nth-child(3n + 2) .testimonial-card {
+  background-color: #fff1f1;
+  box-shadow: inset 0px 3px 6px #f95850;
+}
+
+.row > .col:nth-child(3n + 2) .testimonial-card h2 {
+  color: #f95850;
+}
+
+.row > .col:nth-child(3n + 2) .testimonial-card .card-image {
+  width: 50%;
+  height: auto;
+  border-radius: 50%;
+  border: 0.25rem solid #f95850;
+  box-shadow: 0px 1px 10px rgba(0, 0, 0, 0.15);
+}
+
+.row > .col:nth-child(3n + 2) .testimonial-card hr {
+  border: 0.25rem solid #f95850;
+}
+
+.row > .col:nth-child(3n + 3) .testimonial-card {
+  background-color: #fff9e9;
+  box-shadow: inset 0px 3px 6px #fcb700;
+}
+
+.row > .col:nth-child(3n + 3) .testimonial-card h2 {
+  color: #fcb700;
+}
+
+.row > .col:nth-child(3n + 3) .testimonial-card .card-image {
+  width: 50%;
+  height: auto;
+  border-radius: 50%;
+  border: 0.25rem solid #fcb700;
+  box-shadow: 0px 1px 10px rgba(0, 0, 0, 0.15);
+}
+
+.row > .col:nth-child(3n + 3) .testimonial-card hr {
+  border: 0.25rem solid #fcb700;
+}
+
+/* ----- Video Section -----  */
+
+.video-container {
+  background-image: url(https://udvash.com/Themes/NewUdvashUnmeshTheme/img/udvash/videobg.png);
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  padding-bottom: 1rem;
+}
+
+.video-container-box {
+  position: relative;
+  width: 100%;
+  height: 0;
+  padding-bottom: 56.25%; /* 16:9 aspect ratio */
+  margin: 1rem 0;
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+.video-container-box iframe {
+  position: absolute;
+  top: 0;
+  left: 10%;
+  width: 80%;
+  height: 80%;
+  border: none;
+}
+
+.video-container-img {
+  position: relative;
+  padding-bottom: 1rem;
+}
+
+.video-container-box img {
+  width: 80%;
+  height: auto;
+  border: 0.25rem solid black;
+  border-radius: 1rem;
+}
+
+.play-icon {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  color: #ff3e48;
+  padding: 1rem 1.5rem;
+  cursor: pointer;
+  border: 0.25rem solid #ff3e48;
+  border-radius: 50%;
+  transform: translateX(-50%);
+  transform: translateY(-50%);
+  background-color: #0000007e;
+}
+
+/* ----- Services Section -----  */
+
+.services-container {
+  background-color: #f5fdff;
+  background-image: url(https://udvash.com/Themes/NewUdvashUnmeshTheme/img/udvash/serviceBefore.png),
+    url(https://udvash.com/Themes/NewUdvashUnmeshTheme/img/udvash/serviceAfter.png);
+  background-position: left top, right bottom;
+  background-repeat: no-repeat, no-repeat;
+  margin-top: -1rem;
+  text-align: center;
+}
+
+/* ----- Easy Written Section -----  */
+
+.easy-written-section {
+  background-image: url(https://udvash.com/Themes/NewUdvashUnmeshTheme/img/udvash/easyBg.png);
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+/* ----- Hasle Free Section -----  */
+
+.hasle-free-section {
+  background-color: #faefff;
+}
+
+/* ----- Footer -----  */
+
+footer a:hover {
+  color: #6776f4 !important;
+}
+
+/* ----- Others -----  */
+
+.text-justify {
+  text-align: justify;
+}

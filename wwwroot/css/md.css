@@ -1,0 +1,45 @@
+@media only screen and (max-width: 767px) {
+  /* ----- Programs Section -----  */
+
+  .program-title {
+    font-size: 2rem;
+  }
+
+  /* ----- Programs Section -----  */
+
+  .program-btn-1,
+  .program-btn-2 {
+    padding: 0.5rem 1rem;
+  }
+
+  .program-btn-3 {
+    padding: 0.5rem;
+  }
+
+  /* ----- Success Section -----  */
+
+  .container > h1 {
+    font-size: 2rem;
+  }
+
+  .carousel-indicator > button {
+    height: 0.75rem !important;
+    width: 0.75rem !important;
+  }
+
+  .carousel-indicator .active {
+    border-radius: 1rem !important;
+    width: 2rem !important;
+  }
+
+  /* ----- Video Section -----  */
+
+  .video-container-box iframe {
+    left: 0;
+    width: 100%;
+  }
+
+  .video-container-box img {
+    width: 100%;
+  }
+}
