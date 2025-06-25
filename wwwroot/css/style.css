@@ -368,3 +368,19 @@ footer a:hover {
 .text-justify {
   text-align: justify;
 }
+
+/*----- QnA -----*/
+
+.qna-page {
+    background-color: #E6DFE6;
+}
+
+.qna-container {
+    background-color: #532356;
+}
+
+.custom-textarea {
+    color: black; 
+    font-style: italic; 
+    opacity: 1;
+}

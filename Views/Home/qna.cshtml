@@ -1,0 +1,177 @@
+﻿@{
+    ViewData["Title"] = "QnA";
+}
+
+<div style="background-color: #DED4DE;">
+
+    <div class="container-lg py-2">
+
+        <div class="qna-page p-4 py-2 rounded-2" style="background-color: #E6DFE6">
+
+            @* ===== Ask Question Section =====  *@
+
+            <section class="rounded bg-white mb-2" >
+                <div class="p-4 rounded-top text-white" style="background-color: #532356;">
+                    <div class="d-flex justify-content-between align-items-start">
+                        <div>
+                            <i class="fa-solid fa-circle-info"></i>
+                        </div>
+                        <h3>Ask a New Question</h3>
+                        <i class="fa-solid fa-circle-xmark"></i>
+                    </div>
+
+                    <hr />
+
+                    <div class="row gy-2">
+
+                        <div class="col-12 col-md-4">
+                            <select class="w-100 rounded">
+                                <option value="">All Courses</option>
+                                <option value="12">Class-12 Q&A</option>
+                                <option value="11">Class-11 Q&A</option>
+                                <option value="10">Class-10 Q&A</option>
+                            </select>
+                        </div>
+
+                        <div class="col-12 col-md-4">
+                            <select class="w-100 rounded">
+                                <option value="">All Subject</option>
+                                <option value="bio">Biology</option>
+                                <option value="phy">Physics</option>
+                                <option value="ict">ICT</option>
+                            </select>
+                        </div>
+
+                        <div class="col-12 col-md-4">
+                            <select class="w-100 rounded">
+                                <option value="">All Chapter</option>
+                                <option value="ch-1">Chapter-1</option>
+                                <option value="ch-2">Chapter-2</option>
+                                <option value="ch-3">Chapter-3</option>
+                            </select>
+                        </div>
+
+                    </div>
+
+                </div>
+
+                <div class="bg-white p-4 rounded-bottom">
+                    <div class="rounded-3 p-2"
+                         style="border: 1px solid #EFEEEF; background-color: #F9F9F9;">
+                        <textarea name="question" placeholder="Add a new question" class="custom-textarea border-0 w-100" rows="5"
+                            style="background-color: #f9f9f9;"
+                        ></textarea>
+
+                        <hr class="border-0 opacity-25" />
+
+                        <div class="d-flex justify-content-end">
+                            <div class="d-flex justify-content-end gap-3 align-items-center">
+                                <div
+                                     class="p-2 rounded-circle border-0 text-white d-flex justify-content-center align-items-center attatchment-btn"
+                                     style="background-color: #772397;"
+                                     >
+                                    <i class="fa-solid fa-paperclip"></i>
+                                </div>
+                                <button class="rounded-pill py-1 px-3 border-0 text-white"
+                                        style="background-color: #2E6AFF;">Submit</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </section>
+
+            @* ----- End Ask Question Section ----- *@
+
+            @* ===== QnA Header Section =====  *@
+
+            <div class="qna-container p-4 rounded text-white" style="background-color: #532356">
+                <div class="row row-cols-1 row-cols-md-3 justify-content-center align-items-end">
+
+                    <div class="d-none d-md-block"></div>
+
+                    <div class="text-center">
+                        <h5><u>Class-12 Q&A</u></h5>
+                        <h3>Question and Answers</h3>
+                    </div>
+
+                    <div class="text-center text-md-end">
+                        <button class="rounded-pill py-1 px-3 text-white"
+                                style="border: 1px solid black; background-color: #3E193F;  box-shadow: inset 0 2px 6px rgba(0, 0, 0, 0.75);">
+                            Ask a New Question
+                        </button>
+                    </div>
+
+                </div>
+
+                <hr />
+
+                <div class="row">
+                    <div class="col-6 col-sm-8 col-md-10">
+                        <div class="position-relative">
+                            <input type="text" name="filter" value="" placeholder="Search your question here" class="w-100 py-1 px-4 rounded-pill border-0" />
+                            <div class="position-absolute rounded-circle"
+                                 style="background-color: rgba(228, 228, 228); padding: 0.125rem 0.375rem; top: 0.125rem; right:0.125rem; color: #9C9C9C;">
+                                <i class="fa-solid fa-magnifying-glass"></i>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-6 col-sm-4 col-md-2 ">
+                        <button class="rounded py-1 px-3 text-white d-flex justify-content-center gap-2 align-items-center w-100"
+                                style="border: 1px solid white; background-color: #3E193F;  box-shadow: inset 0 2px 6px rgba(0, 0, 0, 0.75);" >
+                            <span>Filter</span>
+                            <i class="fa-solid fa-filter"></i>
+                        </button>
+                    </div>
+                </div>
+
+                <hr />
+
+                <div class="row gy-2">
+
+                    <div class="col-12 col-sm-6 col-md-3">
+                        <select class="w-100 rounded">
+                            <option value="">All Courses</option>
+                            <option value="12">Class-12 Q&A</option>
+                            <option value="11">Class-11 Q&A</option>
+                            <option value="10">Class-10 Q&A</option>
+                        </select>
+                    </div>
+
+                    <div class="col-12 col-sm-6 col-md-3">
+                        <select class="w-100 rounded">
+                            <option value="">All Subject</option>
+                            <option value="bio">Biology</option>
+                            <option value="phy">Physics</option>
+                            <option value="ict">ICT</option>
+                        </select>
+                    </div>
+
+                    <div class="col-12 col-sm-6 col-md-3">
+                        <select class="w-100 rounded">
+                            <option value="">All Chapter</option>
+                            <option value="ch-1">Chapter-1</option>
+                            <option value="ch-2">Chapter-2</option>
+                            <option value="ch-3">Chapter-3</option>
+                        </select>
+                    </div>
+
+                    <div class="col-12 col-sm-6 col-md-3">
+                        <select class="w-100 rounded">
+                            <option value="">All Question</option>
+                            <option value="cq">CQ</option>
+                            <option value="mcq">MCQ</option>
+                            <option value="practical">Practical</option>
+                        </select>
+                    </div>
+
+                </div>
+
+            </div>
+
+            @* ----- End QnA Header Section ----- *@
+
+        </div>
+
+    </div>
+</div>

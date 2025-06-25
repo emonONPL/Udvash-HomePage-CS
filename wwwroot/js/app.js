@@ -76,4 +76,9 @@ $(document).ready(function() {
     );
     $(".video-container-img").hide();
   });
+
+    //----- QnA Section -----
+
+    
+
 });
