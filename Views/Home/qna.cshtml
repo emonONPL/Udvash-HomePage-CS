@@ -10,11 +10,33 @@
 
             @* ===== Ask Question Section =====  *@
 
-            <section class="rounded bg-white mb-2" >
+            <section class="rounded bg-white mb-2">
                 <div class="p-4 rounded-top text-white" style="background-color: #532356;">
                     <div class="d-flex justify-content-between align-items-start">
-                        <div>
-                            <i class="fa-solid fa-circle-info"></i>
+                        <div class="position-relative">
+                            <div id="instruction-icon" class="border border-white d-flex justify-content-center align-items-center rounded-circle" 
+                                style="cursor: pointer"
+                            >
+                                <i class="fa-solid fa-circle-info"></i>
+                            </div>
+                            <div id="instruction-modal" class="bg-white text-black p-2 rounded-2 position-absolute z-2 d-none" style="min-width:30vw; max-width: 50vw;">
+                                <div class="d-flex justify-content-between align-items-start gap-5">
+                                    <h4><u>Instruction</u></h4>
+                                    <div id="instruction-close" style="cursor:pointer;">
+                                        <i class="fa-solid fa-circle-xmark"></i>
+                                    </div>
+                                </div>
+                                <p>পোর্টালে শিক্ষার্থীদের জন্য প্রশ্ন করার যে নির্দেশনাগুলো থাকবে তা এড বা ইডিট করার মেন্যু লাগবে।</p>
+                                <h5>নির্দেশনাঃ</h5>
+                                <ul>
+                                    <li>পোর্টালে শিক্ষার্থীদের জন্য প্রশ্ন করার যে নির্দেশনাগুলো থাকবে তা এড বা ইডিট করার মেন্যু লাগবে।</li>
+                                    <li>পোর্টালে শিক্ষার্থীদের জন্য প্রশ্ন করার যে নির্দেশনাগুলো থাকবে তা এড বা ইডিট করার মেন্যু লাগবে।</li>
+                                    <li>পোর্টালে শিক্ষার্থীদের জন্য প্রশ্ন করার যে নির্দেশনাগুলো থাকবে তা এড বা ইডিট করার মেন্যু লাগবে।</li>
+                                    <li>পোর্টালে শিক্ষার্থীদের জন্য প্রশ্ন করার যে নির্দেশনাগুলো থাকবে তা এড বা ইডিট করার মেন্যু লাগবে।</li>
+                                    <li>পোর্টালে শিক্ষার্থীদের জন্য প্রশ্ন করার যে নির্দেশনাগুলো থাকবে তা এড বা ইডিট করার মেন্যু লাগবে।</li>
+                                    <li>পোর্টালে শিক্ষার্থীদের জন্য প্রশ্ন করার যে নির্দেশনাগুলো থাকবে তা এড বা ইডিট করার মেন্যু লাগবে।</li>
+                                </ul>
+                            </div>
                         </div>
                         <h3>Ask a New Question</h3>
                         <i class="fa-solid fa-circle-xmark"></i>
@@ -59,21 +81,52 @@
                     <div class="rounded-3 p-2"
                          style="border: 1px solid #EFEEEF; background-color: #F9F9F9;">
                         <textarea name="question" placeholder="Add a new question" class="custom-textarea border-0 w-100" rows="5"
-                            style="background-color: #f9f9f9;"
-                        ></textarea>
+                                  style="background-color: #f9f9f9;"></textarea>
 
                         <hr class="border-0 opacity-25" />
 
                         <div class="d-flex justify-content-end">
                             <div class="d-flex justify-content-end gap-3 align-items-center">
-                                <div
-                                     class="p-2 rounded-circle border-0 text-white d-flex justify-content-center align-items-center attatchment-btn"
-                                     style="background-color: #772397;"
-                                     >
+
+                                <!-- Trigger Button -->
+                                
+                                <div class="p-2 rounded-circle border-0 text-white d-flex justify-content-center align-items-center attatchment-btn"
+                                        style="background-color: #772397; cursor: pointer;"
+                                        tabindex="0"
+                                        id="popoverTrigger"
+                                        data-bs-toggle="popover"
+                                        data-bs-placement="top"
+                                        data-bs-html="true"
+                                        data-bs-content='
+                                        <div class="d-flex gap-2 p-2">
+                                            <button class="p-2 d-flex justify-content-center align-items-center border-0 rounded-circle video-btn text-white" style="background-color:#E11C1D;" data-upload="video" title="Upload Video">
+                                            <i class=" fas fa-video"></i>
+                                            </button>
+                                            <button class="p-2 d-flex justify-content-center align-items-center border-0 rounded-circle audio-btn text-white" data-upload="audio" style="background-color:#0C916E;" title="Upload Audio">
+                                            <i class="fas fa-microphone"></i>
+                                            </button>
+                                            <button class="p-2 d-flex justify-content-center align-items-center border-0 rounded-circle image-btn text-white" data-upload="image" style="background-color:#0A658D;" title="Upload Image">
+                                            <i class="fas fa-image"></i>
+                                            </button>
+                                            <button class="p-2 d-flex justify-content-center align-items-center border-0 rounded-circle pdf-btn text-white" data-upload="pdf" style="background-color:#FF1C1D;" title="Upload PDF">
+                                            <i class=" fas fa-file-pdf"></i>
+                                            </button>
+                                        </div>' 
+                                    >
                                     <i class="fa-solid fa-paperclip"></i>
                                 </div>
+
+                                <input type="file" id="videoInput" accept="video/*" style="display: none;">
+                                <input type="file" id="audioInput" accept="audio/*" style="display: none;">
+                                <input type="file" id="imageInput" accept="image/*" style="display: none;">
+                                <input type="file" id="pdfInput" accept=".pdf" style="display: none;">
+                              
+
+
                                 <button class="rounded-pill py-1 px-3 border-0 text-white"
-                                        style="background-color: #2E6AFF;">Submit</button>
+                                        style="background-color: #2E6AFF;">
+                                    Submit
+                                </button>
                             </div>
                         </div>
                     </div>
@@ -97,7 +150,7 @@
 
                     <div class="text-center text-md-end">
                         <button class="rounded-pill py-1 px-3 text-white"
-                                style="border: 1px solid black; background-color: #3E193F;  box-shadow: inset 0 2px 6px rgba(0, 0, 0, 0.75);">
+                                style="border: 1px solid black; background-color: #3E193F;  box-shadow: inset 0 2px 6px rgba(0, 0, 0, 0.75);" >
                             Ask a New Question
                         </button>
                     </div>
@@ -111,7 +164,7 @@
                         <div class="position-relative">
                             <input type="text" name="filter" value="" placeholder="Search your question here" class="w-100 py-1 px-4 rounded-pill border-0" />
                             <div class="position-absolute rounded-circle"
-                                 style="background-color: rgba(228, 228, 228); padding: 0.125rem 0.375rem; top: 0.125rem; right:0.125rem; color: #9C9C9C;">
+                                 style="background-color: rgba(228, 228, 228); padding: 0.125rem 0.375rem; top: 0.125rem; right:0.125rem; color: #9C9C9C;" >
                                 <i class="fa-solid fa-magnifying-glass"></i>
                             </div>
                         </div>
