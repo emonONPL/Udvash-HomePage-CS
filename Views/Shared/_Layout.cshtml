@@ -14,6 +14,162 @@
     <link href="~/css/md.css" rel="stylesheet" />
     <link href="~/css/sm.css" rel="stylesheet" />
 
+    <style>
+
+        textarea:focus {
+            border: none;
+            outline: none;
+            box-shadow: none;
+        }
+
+        /* ----- files to be uploaded -----  */
+
+        .file-preview {
+            position: relative;
+            display: inline-block;
+            margin: 5px;
+            border: 1px solid #dee2e6;
+            border-radius: 8px;
+            overflow: hidden;
+            background: white;
+            width: 120px;
+        }
+
+        .file-thumbnail {
+            width: 120px;
+            height: 80px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: #f8f9fa;
+            position: relative;
+        }
+
+            .file-thumbnail img {
+                max-width: 100%;
+                max-height: 100%;
+                object-fit: cover;
+            }
+
+            .file-thumbnail .default-icon {
+                font-size: 24px;
+                color: #6c757d;
+            }
+
+        .file-info {
+            padding: 5px 8px;
+            font-size: 11px;
+            color: #495057;
+            border-top: 1px solid #dee2e6;
+        }
+
+        .file-name {
+            font-weight: 500;
+            margin-bottom: 2px;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+
+        .file-size {
+            color: #6c757d;
+        }
+
+        .file-remove {
+            position: absolute;
+            top: 2px;
+            right: 2px;
+            background: rgba(220, 53, 69, 0.8);
+            color: white;
+            border: none;
+            border-radius: 50%;
+            width: 20px;
+            height: 20px;
+            font-size: 10px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 1;
+        }
+
+            .file-remove:hover {
+                background: #dc3545;
+            }
+
+        .upload-progress {
+            height: 4px;
+            background: #e9ecef;
+            border-radius: 2px;
+            overflow: hidden;
+            margin: 3px 8px 8px 8px;
+        }
+
+        .upload-progress-bar {
+            height: 100%;
+            background: #28a745;
+            width: 0%;
+            transition: width 0.3s ease;
+        }
+
+        /* File type specific colors */
+        .video-thumbnail {
+            background: linear-gradient(135deg, #E11C1D, #ff4757);
+        }
+
+        .audio-thumbnail {
+            background: linear-gradient(135deg, #0C916E, #2ed573);
+        }
+
+        .pdf-thumbnail {
+            background: linear-gradient(135deg, #FF1C1D, #ff4757);
+        }
+
+            .video-thumbnail .default-icon,
+            .audio-thumbnail .default-icon,
+            .pdf-thumbnail .default-icon {
+                color: white;
+            }
+
+        /* Uploaded files section */
+        .uploaded-file {
+            display: flex;
+            align-items: center;
+            padding: 10px;
+            margin: 5px 0;
+            background: white;
+            border: 1px solid #dee2e6;
+            border-radius: 8px;
+        }
+
+        .uploaded-file-icon {
+            width: 40px;
+            height: 40px;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 10px;
+            color: white;
+            font-size: 16px;
+        }
+
+        .uploaded-file-info {
+            flex: 1;
+        }
+
+        .uploaded-file-name {
+            font-weight: 500;
+            margin-bottom: 2px;
+        }
+
+        .uploaded-file-details {
+            font-size: 12px;
+            color: #6c757d;
+        }
+
+    </style>
+
 </head>
 
 
@@ -182,33 +338,136 @@
             // ===== Uploading Files with Popover =====
 
             const $trigger = $('#popoverTrigger');
-            const $feedback = $('#uploadFeedback');
+            const $filesToBeUploaded = $('#filesToBeUploaded');
+            const $textarea = $('textarea[name="question"]');
+            const $submitBtn = $('#submitBtn');
+            const $viewResources = $('#view-resources');
+
+            let selectedFiles = [];
+            let uploadedFiles = [];
+            let storedFiles = [];
 
             // Initialize popover
             const popover = new bootstrap.Popover($trigger[0], {
                 trigger: 'manual',
                 placement: 'top',
                 html: true,
-                sanitize: false // Allow our custom HTML content
+                sanitize: false
             });
 
             let hideTimeout;
             let popoverInitialized = false;
 
-            // Function to show feedback
-            function showFeedback(message, type = 'info') {
-                const alertClass = `alert-${type}`;
-                $feedback.html(`
-                    <div class="alert ${alertClass} alert-dismissible fade show" role="alert">
-                        ${message}
-                        <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
-                    </div>
-                `);
+            // Function to check if submit should be enabled
+            function checkSubmitButton() {
+                const hasFiles = selectedFiles.length > 0;
+                const hasText = $textarea.val().trim().length > 0;
+                $submitBtn.prop('disabled', !(hasFiles || hasText));
+                $submitBtn.css('opacity', hasFiles || hasText ? '1' : '0.5');
+            }
 
-                // Auto-hide after 5 seconds
-                setTimeout(() => {
-                    $feedback.find('.alert').alert('close');
-                }, 5000);
+            // Function to adjust textarea rows
+            function adjustTextareaRows() {
+                if (selectedFiles.length > 0) {
+                    $textarea.attr('rows', 2);
+                } else {
+                    $textarea.attr('rows', 5);
+                }
+            }
+
+            // Function to create file preview
+            function createFilePreview(file, fileId) {
+                const fileSize = (file.size / 1024 / 1024).toFixed(2);
+                const fileType = file.type.split('/')[0];
+
+                let thumbnailContent = '';
+                let thumbnailClass = '';
+
+                if (fileType === 'image') {
+                    const imageUrl = URL.createObjectURL(file);
+                    thumbnailContent = `<img src="${imageUrl}" alt="Preview">`;
+                } else if (fileType === 'video') {
+                    thumbnailClass = 'video-thumbnail';
+                    thumbnailContent = '<i class="fas fa-video default-icon"></i>';
+                } else if (fileType === 'audio') {
+                    thumbnailClass = 'audio-thumbnail';
+                    thumbnailContent = '<i class="fas fa-music default-icon"></i>';
+                } else if (file.type === 'application/pdf') {
+                    thumbnailClass = 'pdf-thumbnail';
+                    thumbnailContent = '<i class="fas fa-file-pdf default-icon"></i>';
+                }
+
+
+                return `
+                    <div class="file-preview" data-file-id="${fileId}">
+                        <button class="file-remove" onclick="removeFile('${fileId}')">
+                            <i class="fas fa-times"></i>
+                        </button>
+                        <div class="file-thumbnail ${thumbnailClass}">
+                            ${thumbnailContent}
+                        </div>
+                        <div class="file-info">
+                            <div class="file-name" title="${file.name}">${file.name}</div>
+                            <div class="file-size">${fileSize} MB</div>
+                        </div>
+                        <div class="upload-progress">
+                            <div class="upload-progress-bar" data-file-id="${fileId}"></div>
+                        </div>
+                    </div>
+                `;
+            }
+
+            function createFileView(file, fileId) {
+                const fileSize = (file.size / 1024 / 1024).toFixed(2);
+                const fileType = file.type.split('/')[0];
+
+                let thumbnailContent = '';
+                let thumbnailClass = '';
+
+                if (fileType === 'image') {
+                    const imageUrl = URL.createObjectURL(file);
+                    thumbnailContent = `<img src="${imageUrl}" alt="Preview">`;
+                } else if (fileType === 'video') {
+                    thumbnailClass = 'video-thumbnail';
+                    thumbnailContent = '<i class="fas fa-video default-icon"></i>';
+                } else if (fileType === 'audio') {
+                    thumbnailClass = 'audio-thumbnail';
+                    thumbnailContent = '<i class="fas fa-music default-icon"></i>';
+                } else if (file.type === 'application/pdf') {
+                    thumbnailClass = 'pdf-thumbnail';
+                    thumbnailContent = '<i class="fas fa-file-pdf default-icon"></i>';
+                }
+
+
+                return `
+                    <div class="file-preview" data-file-id="${fileId}">
+                        <div class="file-thumbnail ${thumbnailClass}">
+                            ${thumbnailContent}
+                        </div>
+                        <div class="file-info">
+                            <div class="file-name" title="${file.name}">${file.name}</div>
+                            <div class="file-size">${fileSize} MB</div>
+                        </div>
+                        <div class="upload-progress">
+                            <div class="upload-progress-bar" data-file-id="${fileId}"></div>
+                        </div>
+                    </div>
+                `;
+            }
+
+            // Function to simulate upload progress
+            function simulateUpload(fileId) {
+                const $progressBar = $(`.upload-progress-bar[data-file-id="${fileId}"]`);
+                let progress = 0;
+
+                const interval = setInterval(() => {
+                    progress += Math.random() * 15;
+                    if (progress >= 100) {
+                        progress = 100;
+                        clearInterval(interval);
+                    }
+                    $progressBar.css('width', progress + '%');
+                }, 200);
             }
 
             // Function to setup popover event listeners
@@ -216,7 +475,6 @@
                 const $popoverEl = $('.popover');
 
                 if ($popoverEl.length && !popoverInitialized) {
-                    // Handle popover hover
                     $popoverEl.on('mouseenter', function () {
                         clearTimeout(hideTimeout);
                     }).on('mouseleave', function () {
@@ -226,7 +484,6 @@
                         }, 200);
                     });
 
-                    // Handle upload button clicks
                     $popoverEl.find('[data-upload]').on('click', function(e) {
                         e.preventDefault();
                         e.stopPropagation();
@@ -234,14 +491,9 @@
                         const uploadType = $(this).data('upload');
                         const $input = $(`#${uploadType}Input`);
 
-                        // Hide popover
                         popover.hide();
                         popoverInitialized = false;
-
-                        // Trigger file input
                         $input.click();
-
-                        showFeedback(`Selecting ${uploadType} file...`, 'info');
                     });
 
                     popoverInitialized = true;
@@ -252,8 +504,6 @@
             $trigger.on('mouseenter', function () {
                 clearTimeout(hideTimeout);
                 popover.show();
-
-                // Setup events after popover is shown
                 setTimeout(setupPopoverEvents, 100);
             });
 
@@ -270,35 +520,146 @@
             // Handle file input changes
             $('input[type="file"]').on('change', function() {
                 const files = this.files;
-                const type = this.id.replace('Input', '').toUpperCase();
 
                 if (files.length > 0) {
-                    const file = files[0];
-                    const fileName = file.name;
-                    const fileSize = (file.size / 1024 / 1024).toFixed(2); // MB
+                    Array.from(files).forEach(file => {
+                        const fileId = Date.now() + Math.random().toString(36).substr(2, 9);
+                        const fileData = {
+                            id: fileId,
+                            file: file,
+                            name: file.name,
+                            size: file.size,
+                            type: file.type
+                        };
 
-                    showFeedback(`
-                        <strong>${type} File Selected:</strong><br>
-                        <small>
-                            <strong>Name:</strong> ${fileName}<br>
-                            <strong>Size:</strong> ${fileSize} MB
-                        </small>
-                    `, 'success');
+                        selectedFiles.push(fileData);
 
-                    // Here you would typically upload the file
-                    console.log(`${type} file selected:`, file);
+                        // Add file preview to the upload area
+                        $filesToBeUploaded.append(createFilePreview(file, fileId));
 
-                    // Simulate upload process
-                    setTimeout(() => {
-                        showFeedback(`${type} file uploaded successfully!`, 'success');
-                    }, 1500);
+                        // Start simulated upload
+                        simulateUpload(fileId);
 
-                } else {
-                    showFeedback('No file selected', 'warning');
+                        // Adjust textarea rows
+                        adjustTextareaRows();
+
+                        // Check submit button
+                        checkSubmitButton();
+                    });
                 }
 
                 // Reset the input
                 this.value = '';
+            });
+
+            // Remove file function (global scope)
+            window.removeFile = function(fileId) {
+                selectedFiles = selectedFiles.filter(f => f.id !== fileId);
+                $(`.file-preview[data-file-id="${fileId}"]`).remove();
+                adjustTextareaRows();
+                checkSubmitButton();
+            };
+
+            // Handle textarea input
+            $textarea.on('input', function() {
+                checkSubmitButton();
+            });
+
+
+            // ********************************
+            function renderList() {
+                const html = storedFiles.map(fileData => `
+                    <div class="bg-white p-4 mt-2 rounded text-end">
+                        <p><b>Date:</b> ${fileData?.date}</p>
+                        <div class="bg-light p-2 w-75 rounded ms-auto">
+                            <p>${fileData?.text ? fileData?.text : ""}</p>
+                            <div class="d-flex flex-column gap-2">
+                                ${fileData?.files ? fileData.files.map(file => createFileView(file.file, file.id)).join("") : ""}
+                            </div>
+                        </div>
+                    </div>
+                `).join("");
+                $("#qna-list").html(html);
+            }
+            // *********************************
+
+            // Handle submit
+            $submitBtn.on('click', function() {
+                const questionText = $textarea.val().trim();
+
+                if (selectedFiles.length > 0 || questionText) {
+                    // Move files to view-resources section
+                    let objectToBeStored = {date: new Date().toLocaleString()};
+
+                    if (selectedFiles.length > 0) {
+                        objectToBeStored.files = selectedFiles;
+
+                        let resourcesHtml = '<h5 class="mb-3">Uploaded Resources:</h5>';
+
+                        selectedFiles.forEach(fileData => {
+                            const fileSize = (fileData.size / 1024 / 1024).toFixed(2);
+                            const fileType = fileData.type.split('/')[0];
+                            let iconClass = 'fas fa-file';
+                            let bgColor = '#6c757d';
+
+                            if (fileType === 'image') {
+                                iconClass = 'fas fa-image';
+                                bgColor = '#0A658D';
+                            } else if (fileType === 'video') {
+                                iconClass = 'fas fa-video';
+                                bgColor = '#E11C1D';
+                            } else if (fileType === 'audio') {
+                                iconClass = 'fas fa-music';
+                                bgColor = '#0C916E';
+                            } else if (fileData.type === 'application/pdf') {
+                                iconClass = 'fas fa-file-pdf';
+                                bgColor = '#FF1C1D';
+                            }
+
+                            resourcesHtml += `
+                                <div class="uploaded-file">
+                                    <div class="uploaded-file-icon" style="background-color: ${bgColor}">
+                                        <i class="${iconClass}"></i>
+                                    </div>
+                                    <div class="uploaded-file-info">
+                                        <div class="uploaded-file-name">${fileData.name}</div>
+                                        <div class="uploaded-file-details">Size: ${fileSize} MB • Type: ${fileData.type}</div>
+                                    </div>
+                                </div>
+                            `;
+                        });
+
+                        // $viewResources.html(resourcesHtml);
+                        uploadedFiles = [...selectedFiles];
+                    }
+
+                    if (questionText) {
+                        objectToBeStored.text = questionText;
+                    }
+
+                    storedFiles.push(objectToBeStored);
+                    console.log(objectToBeStored);
+                    renderList();
+
+                    // Clear the form
+                    selectedFiles = [];
+                    $filesToBeUploaded.empty();
+                    $textarea.val('');
+                    adjustTextareaRows();
+                    checkSubmitButton();
+
+                    // Show success message
+                    $viewResources.prepend(`
+                        <div class="toast align-items-center text-white bg-primary border-0" role="alert" aria-live="assertive" aria-atomic="true" data-bs-autohide="true">
+                          <div class="d-flex">
+                            <div class="toast-body">
+                              Hello, world! This is a toast message.
+                            </div>
+                            <button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast" aria-label="Close"></button>
+                          </div>
+                        </div>
+                    `);
+                }
             });
 
             // Hide popover when clicking outside
@@ -312,7 +673,7 @@
                 }
             });
 
-            // Handle popover events using Bootstrap's built-in events
+            // Handle popover events
             $trigger[0].addEventListener('shown.bs.popover', function () {
                 setTimeout(setupPopoverEvents, 50);
             });
@@ -321,6 +682,10 @@
                 popoverInitialized = false;
                 clearTimeout(hideTimeout);
             });
+
+            checkSubmitButton();
+
+            
 
         });
     </script>

@@ -80,6 +80,7 @@
                 <div class="bg-white p-4 rounded-bottom">
                     <div class="rounded-3 p-2"
                          style="border: 1px solid #EFEEEF; background-color: #F9F9F9;">
+                         <div id="filesToBeUploaded"></div>
                         <textarea name="question" placeholder="Add a new question" class="custom-textarea border-0 w-100" rows="5"
                                   style="background-color: #f9f9f9;"></textarea>
 
@@ -97,7 +98,7 @@
                                         data-bs-toggle="popover"
                                         data-bs-placement="top"
                                         data-bs-html="true"
-                                        data-bs-content='
+                                        data-bs-content = '
                                         <div class="d-flex gap-2 p-2">
                                             <button class="p-2 d-flex justify-content-center align-items-center border-0 rounded-circle video-btn text-white" style="background-color:#E11C1D;" data-upload="video" title="Upload Video">
                                             <i class=" fas fa-video"></i>
@@ -120,10 +121,8 @@
                                 <input type="file" id="audioInput" accept="audio/*" style="display: none;">
                                 <input type="file" id="imageInput" accept="image/*" style="display: none;">
                                 <input type="file" id="pdfInput" accept=".pdf" style="display: none;">
-                              
 
-
-                                <button class="rounded-pill py-1 px-3 border-0 text-white"
+                                <button id="submitBtn" class="rounded-pill py-1 px-3 border-0 text-white"
                                         style="background-color: #2E6AFF;">
                                     Submit
                                 </button>
@@ -131,6 +130,8 @@
                         </div>
                     </div>
                 </div>
+
+                <div id="view-resources"></div>
 
             </section>
 
@@ -223,6 +224,25 @@
             </div>
 
             @* ----- End QnA Header Section ----- *@
+
+            @* ===== QnA List Section =====   *@
+
+            <section id="qna-list" class="">
+
+                <div class="bg-white p-4 mt-2 rounded text-end">
+                    <p><b>Date:</b> 13 Dec, 2025 10:47 AM</p>
+                    <div class="bg-light p-2 w-75 rounded ms-auto">
+                        <p>সিএনজি পাম্প হতে গাড়িতে যে গ্যাস পূর্ণ করে তা মূলত কি?</p>
+                        <div class="d-flex flex-column gap-2">
+                            <img class="rounded" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTrWGnkEWaaNZjJTYAVRWZwi1ehw0muzeOnwg&s" alt="Alternate Text" />
+                            <img class="rounded" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQtmrSNV0myalPaPOg2A5AhvPl_1DHzrxvyuw&s" alt="Alternate Text" />
+                        </div>
+                    </div>
+                </div>
+
+            </section>
+
+            @* ----- End QnA List Section -----  *@
 
         </div>
 
