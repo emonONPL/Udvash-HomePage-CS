@@ -10,7 +10,7 @@
 
             @* ===== Ask Question Section =====  *@
 
-            <section class="rounded bg-white mb-2">
+            <section id="askQuestionForm" class="rounded bg-white mb-2 d-none">
                 <div class="p-4 rounded-top text-white" style="background-color: #532356;">
                     <div class="d-flex justify-content-between align-items-start">
                         <div class="position-relative">
@@ -39,7 +39,9 @@
                             </div>
                         </div>
                         <h3>Ask a New Question</h3>
-                        <i class="fa-solid fa-circle-xmark"></i>
+                        <div id="askFormClose" style="cursor:pointer;">
+                            <i class="fa-solid fa-circle-xmark"></i>
+                        </div>
                     </div>
 
                     <hr />
@@ -131,7 +133,7 @@
                     </div>
                 </div>
 
-                <div id="view-resources"></div>
+                
 
             </section>
 
@@ -150,7 +152,7 @@
                     </div>
 
                     <div class="text-center text-md-end">
-                        <button class="rounded-pill py-1 px-3 text-white"
+                        <button id="askBtn" class="rounded-pill py-1 px-3 text-white"
                                 style="border: 1px solid black; background-color: #3E193F;  box-shadow: inset 0 2px 6px rgba(0, 0, 0, 0.75);" >
                             Ask a New Question
                         </button>
@@ -233,10 +235,6 @@
                     <p><b>Date:</b> 13 Dec, 2025 10:47 AM</p>
                     <div class="bg-light p-2 w-75 rounded ms-auto">
                         <p>সিএনজি পাম্প হতে গাড়িতে যে গ্যাস পূর্ণ করে তা মূলত কি?</p>
-                        <div class="d-flex flex-column gap-2">
-                            <img class="rounded" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTrWGnkEWaaNZjJTYAVRWZwi1ehw0muzeOnwg&s" alt="Alternate Text" />
-                            <img class="rounded" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQtmrSNV0myalPaPOg2A5AhvPl_1DHzrxvyuw&s" alt="Alternate Text" />
-                        </div>
                     </div>
                 </div>
 
