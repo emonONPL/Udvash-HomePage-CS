@@ -65,6 +65,7 @@
     function createFilePreview(file, fileId) {
         const fileSize = (file.size / 1024 / 1024).toFixed(2);
         const fileType = file.type.split('/')[0];
+        const fileUrl = URL.createObjectURL(file);
 
         let thumbnailContent = '';
         let thumbnailClass = '';
@@ -85,8 +86,8 @@
 
 
         return `
-                    <div class="file-preview" data-file-id="${fileId}">
-                        <button class="file-remove" onclick="removeFile('${fileId}')">
+                    <div class="file-preview" data-file-id="${fileId}" data-file-url="${fileUrl}" data-file-type="${fileType}">
+                        <button class="file-remove" onclick="removeFile(event, '${fileId}')">
                             <i class="fas fa-times"></i>
                         </button>
                         <div class="file-thumbnail ${thumbnailClass}">
@@ -129,7 +130,7 @@
 
 
         return `
-                    <div class="file-preview" style="cursor: pointer" data-file-id="${fileUrl}" data-file-type="${fileType}">
+                    <div class="file-preview" style="cursor: pointer" data-file-id="${fileId}" data-file-url="${fileUrl}" data-file-type="${fileType}">
                         <div class="file-thumbnail ${thumbnailClass}">
                             ${thumbnailContent}
                         </div>
@@ -144,7 +145,7 @@
 
 
     $(document).on("click", ".file-preview", function () {
-        var fileUrl = $(this).data("file-id");
+        var fileUrl = $(this).data("file-url");
         var fileType = $(this).data("file-type");
         console.log(fileUrl, fileType);
 
@@ -273,11 +274,12 @@
     });
 
     // Remove file function (global scope)
-    window.removeFile = function (fileId) {
+    window.removeFile = function (e, fileId) {
         selectedFiles = selectedFiles.filter(f => f.id !== fileId);
         $(`.file-preview[data-file-id="${fileId}"]`).remove();
         adjustTextareaRows();
         checkSubmitButton();
+        e.stopImmediatePropagation();
     };
 
     // Handle textarea input
@@ -300,6 +302,15 @@
                     </div>
                 `).join("");
         $("#qna-list").html(html);
+
+        if (typeof MathJax !== 'undefined') {
+            MathJax.typesetPromise([document.getElementById('qna-list')]).then(() => {
+                // MathJax rendering complete
+                console.log('MathJax rendering complete');
+            }).catch((err) => {
+                console.error('MathJax rendering error:', err);
+            });
+        }
     }
     // *********************************
 
