@@ -372,8 +372,8 @@
             }
 
 
-            storedFiles.push(objectToBeStored);
-            console.log(objectToBeStored);
+            storedFiles.unshift(objectToBeStored);
+           
             renderList();
 
             // Clear the form
